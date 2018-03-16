@@ -18,33 +18,75 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="740-Vu-dhg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0dY-ah-r5T">
+                                <rect key="frame" x="1" y="50" width="373" height="17"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EwL-ol-4wR">
+                                <rect key="frame" x="1" y="600" width="373" height="17"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0vc-GF-JWU">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Pick" id="uEh-c1-Vyi">
-                                        <connections>
-                                            <action selector="pickImageFromAlbum:" destination="BYZ-38-t0r" id="sgR-4q-BMz"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Camera" id="Zb3-tQ-aJx">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="B2W-QE-7Zk"/>
+                                    <barButtonItem systemItem="camera" id="Zb3-tQ-aJx">
                                         <connections>
                                             <action selector="getImageFromCamera:" destination="BYZ-38-t0r" id="T13-Cx-q18"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9iF-Dx-XuZ"/>
+                                    <barButtonItem title="Album" id="uEh-c1-Vyi">
+                                        <connections>
+                                            <action selector="pickImageFromAlbum:" destination="BYZ-38-t0r" id="sgR-4q-BMz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0xT-Ms-B7A"/>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="740-Vu-dhg">
-                                <rect key="frame" x="15" y="40" width="345" height="563"/>
-                            </imageView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ixb-mg-UtV">
+                                <rect key="frame" x="0.0" y="-4" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="z4a-Jq-IwC">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="sDq-LF-dPc">
+                                            <connections>
+                                                <action selector="shareMeme:" destination="BYZ-38-t0r" id="6iJ-6w-WUx"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="53e-2U-WFJ">
+                                            <connections>
+                                                <action selector="cancelMeme:" destination="BYZ-38-t0r" id="aK6-sI-Xlz"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0vc-GF-JWU" firstAttribute="top" secondItem="740-Vu-dhg" secondAttribute="bottom" constant="20" id="Cai-pQ-HD1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="740-Vu-dhg" secondAttribute="trailing" constant="15" id="DFa-se-i84"/>
-                            <constraint firstItem="740-Vu-dhg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="GKS-fP-hnX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0vc-GF-JWU" secondAttribute="bottom" id="1lL-mo-KkI"/>
+                            <constraint firstAttribute="bottom" secondItem="740-Vu-dhg" secondAttribute="bottom" id="Cai-pQ-HD1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="740-Vu-dhg" secondAttribute="trailing" id="DFa-se-i84"/>
+                            <constraint firstItem="740-Vu-dhg" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="GKS-fP-hnX"/>
+                            <constraint firstItem="740-Vu-dhg" firstAttribute="trailing" secondItem="0dY-ah-r5T" secondAttribute="trailing" constant="1" id="KZq-pt-OTp"/>
                             <constraint firstItem="0vc-GF-JWU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="LJd-v3-TgY"/>
                             <constraint firstItem="0vc-GF-JWU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vqg-76-KP4"/>
-                            <constraint firstItem="740-Vu-dhg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="cYg-nV-3QX"/>
+                            <constraint firstItem="740-Vu-dhg" firstAttribute="bottom" secondItem="EwL-ol-4wR" secondAttribute="bottom" constant="50" id="ZMN-sq-F94"/>
+                            <constraint firstItem="0dY-ah-r5T" firstAttribute="top" secondItem="740-Vu-dhg" secondAttribute="top" constant="50" id="bSS-eD-tTe"/>
+                            <constraint firstItem="740-Vu-dhg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cYg-nV-3QX"/>
+                            <constraint firstItem="EwL-ol-4wR" firstAttribute="leading" secondItem="740-Vu-dhg" secondAttribute="leading" constant="1" id="nGz-ra-btT"/>
+                            <constraint firstItem="740-Vu-dhg" firstAttribute="trailing" secondItem="EwL-ol-4wR" secondAttribute="trailing" constant="1" id="nNx-y6-m8P"/>
+                            <constraint firstItem="0dY-ah-r5T" firstAttribute="leading" secondItem="740-Vu-dhg" secondAttribute="leading" constant="1" id="rtg-Ca-4ln"/>
                             <constraint firstItem="0vc-GF-JWU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="saD-DF-hbv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -52,10 +94,16 @@
                     <connections>
                         <outlet property="cameraButton" destination="Zb3-tQ-aJx" id="Jt4-84-db7"/>
                         <outlet property="memeImageView" destination="740-Vu-dhg" id="Z8F-Tb-QZK"/>
+                        <outlet property="memeTextBottom" destination="EwL-ol-4wR" id="ghS-r4-06r"/>
+                        <outlet property="memeTextTop" destination="0dY-ah-r5T" id="vYF-2y-gul"/>
+                        <outlet property="navBar" destination="ixb-mg-UtV" id="ogv-aY-wIj"/>
+                        <outlet property="shareButton" destination="sDq-LF-dPc" id="aVo-yE-fJh"/>
+                        <outlet property="toolbar" destination="0vc-GF-JWU" id="gca-ux-IS7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
     </scenes>
 </document>
