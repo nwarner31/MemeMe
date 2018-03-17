@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CreateMemeViewController.swift
 //  MemeMe
 //
 //  Created by Nathaniel Warner on 3/9/18.
@@ -27,16 +27,8 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: - View functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Sets up the top textfield
-        memeTextTop.text = defaultMemeTopText
-        memeTextTop.delegate = self
-        memeTextTop.defaultTextAttributes = memeTextAttributes
-        memeTextTop.textAlignment = NSTextAlignment.center
-        // Sets up the bottom text field
-        memeTextBottom.text = defaultMemeBottomText
-        memeTextBottom.delegate = self
-        memeTextBottom.defaultTextAttributes = memeTextAttributes
-        memeTextBottom.textAlignment = NSTextAlignment.center
+        setupTextField(textField: memeTextTop, defaultText: defaultMemeTopText)
+        setupTextField(textField: memeTextBottom, defaultText: defaultMemeBottomText)
     }
     override func viewWillAppear(_ animated: Bool) {
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -74,15 +66,15 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         dismiss(animated: true, completion: nil)
     }
     // MARK: - Text field functions
+    func setupTextField(textField: UITextField, defaultText: String) {
+        textField.text = defaultText
+        textField.delegate = self
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.center
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == memeTextTop {
-            if textField.text == defaultMemeTopText {
-                textField.text = ""
-            }
-        } else if textField == memeTextBottom {
-            if textField.text == defaultMemeBottomText {
-                textField.text = ""
-            }
+        if [defaultMemeTopText, defaultMemeBottomText].contains(textField.text!) {
+            textField.text = ""
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -112,28 +104,27 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     }
     // MARK: - Meme functions
     func generateMeme() -> UIImage {
-        //Sets up the UI to create the image
-        navBar.isHidden = true
-        toolbar.isHidden = true
+        // Sets up the UI to create the meme
+        let topTextChanged = memeTextTop.text != defaultMemeTopText
+        let bottomTextChanged = memeTextBottom.text != defaultMemeBottomText
+        UIVisibility(barVisibility: false, topTextVisibility: topTextChanged, bottomTextVisibility: bottomTextChanged)
         memeTextTop.resignFirstResponder()
         memeTextBottom.resignFirstResponder()
-        if memeTextTop.text == defaultMemeTopText {
-            memeTextTop.isHidden = true
-        }
-        if memeTextBottom.text == defaultMemeBottomText {
-            memeTextBottom.isHidden = true
-        }
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         // Returns the UI to the way it was
-        navBar.isHidden = false
-        toolbar.isHidden = false
-        memeTextTop.isHidden = false
-        memeTextBottom.isHidden = false
+        UIVisibility(barVisibility: true, topTextVisibility: true, bottomTextVisibility: true)
         return memedImage
+    }
+    // Sets the visibility of portions of the UI in order to create the meme and then back
+    func UIVisibility(barVisibility: Bool, topTextVisibility: Bool, bottomTextVisibility: Bool) {
+        navBar.isHidden = !barVisibility
+        toolbar.isHidden = !barVisibility
+        memeTextTop.isHidden = !topTextVisibility
+        memeTextBottom.isHidden = !bottomTextVisibility
     }
     @IBAction func shareMeme(_ sender: Any) {
         let memeImage = generateMeme()
@@ -156,10 +147,4 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         memeImageView.image = nil
         shareButton.isEnabled = false
     }
-}
-struct Meme {
-    var topText: String
-    var bottomText: String
-    var originalImage: UIImage
-    var memeImage: UIImage
 }
