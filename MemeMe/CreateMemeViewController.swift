@@ -31,11 +31,10 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         setupTextField(textField: memeTextBottom, defaultText: defaultMemeBottomText)
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         // Check to see if there is an image selected and if not disable the share button.
-        if memeImageView.image == nil {
-            shareButton.isEnabled = false
-        }
+        shareButton.isEnabled = memeImageView.image != nil
         subscribeToKeyboardNotifications()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -111,8 +110,8 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         memeTextTop.resignFirstResponder()
         memeTextBottom.resignFirstResponder()
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         // Returns the UI to the way it was
@@ -135,7 +134,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
                 self.save(memedImage: memeImage)
             }
         }
-        self.present(shareActivityController, animated: true, completion: nil)
+        present(shareActivityController, animated: true, completion: nil)
     }
     func save(memedImage: UIImage) {
         // Create the meme
