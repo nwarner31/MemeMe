@@ -32,6 +32,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         // Check to see if there is an image selected and if not disable the share button.
         shareButton.isEnabled = memeImageView.image != nil
@@ -139,11 +140,11 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     func save(memedImage: UIImage) {
         // Create the meme
         let meme = Meme(topText: memeTextTop.text!, bottomText: memeTextBottom.text!, originalImage: memeImageView.image!, memeImage: memedImage)
+        //Add the meme to the array in Application Delegate
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+        dismiss(animated: true, completion: nil)
     }
     @IBAction func cancelMeme(_ sender: Any) {
-        memeTextTop.text = defaultMemeTopText
-        memeTextBottom.text = defaultMemeBottomText
-        memeImageView.image = nil
-        shareButton.isEnabled = false
+        dismiss(animated: true, completion: nil)
     }
 }
