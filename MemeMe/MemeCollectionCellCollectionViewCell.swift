@@ -9,8 +9,5 @@
 import UIKit
 
 class MemeCollectionCellCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var memeTopTextLabel: UILabel!
-    @IBOutlet weak var memeBottomTextLabel: UILabel!
     @IBOutlet weak var memeImageView: UIImageView!
-    @IBOutlet weak var flowLayout: UICollectionViewLayout!
 }

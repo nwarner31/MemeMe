@@ -10,27 +10,34 @@ import Foundation
 import UIKit
 
 class MemeTableViewController: UITableViewController {
+    // The collection of memes to be displayed in the collection view
     var memes: [Meme]! {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.memes
     }
-    //var refreshControl = UIRefreshControl() as UIRefreshControl!
+    //MARK: View functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
         tableView.rowHeight = CGFloat(110.0)
     }
+    //MARK: Table View functions
+    //Number of items in table view function
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
+    //Populates the rows functions
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "memeTableCell", for: indexPath) as! MemeCollectionTableViewCell
         let meme = memes[indexPath.row]
         cell.memeTextLabel.text = "\(meme.topText) \(meme.bottomText)"
-        cell.memeImageView.image = meme.originalImage
+        cell.memeImageView.image = meme.memeImage
         return cell
     }
+    //Action when a row within the table view is clicked
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        let memeDetailView = self.storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+        memeDetailView.memeImage = memes[indexPath.row].memeImage
+        navigationController?.pushViewController(memeDetailView, animated: true)
     }
 }
