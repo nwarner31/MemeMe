@@ -11,13 +11,12 @@ import UIKit
 
 class MemeTableViewController: UITableViewController {
     // The collection of memes to be displayed in the collection view
-    var memes: [Meme]! {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.memes
-    }
+    var memes: [Meme]!
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     //MARK: View functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        memes = appDelegate.memes
         tableView.reloadData()
         tableView.rowHeight = CGFloat(110.0)
     }
@@ -39,5 +38,13 @@ class MemeTableViewController: UITableViewController {
         let memeDetailView = self.storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
         memeDetailView.memeImage = memes[indexPath.row].memeImage
         navigationController?.pushViewController(memeDetailView, animated: true)
+    }
+    //Action to swipe to delete a meme
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            appDelegate.memes.remove(at: indexPath.row)
+            memes = appDelegate.memes
+            tableView.reloadData()
+        }
     }
 }
