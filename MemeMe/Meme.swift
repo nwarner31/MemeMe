@@ -6,7 +6,6 @@
 //  Copyright © 2018 Nathaniel Warner. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct Meme {

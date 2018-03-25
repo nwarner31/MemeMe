@@ -15,10 +15,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.memes
     }
-    //MARK: View functions
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    //MARK: View function
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let collectionView = collectionView {
