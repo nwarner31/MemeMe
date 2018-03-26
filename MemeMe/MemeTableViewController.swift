@@ -36,7 +36,7 @@ class MemeTableViewController: UITableViewController {
     //Action when a row within the table view is clicked
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let memeDetailView = self.storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
-        memeDetailView.memeImage = memes[indexPath.row].memeImage
+        memeDetailView.meme = memes[indexPath.row]
         navigationController?.pushViewController(memeDetailView, animated: true)
     }
     //Action to swipe to delete a meme

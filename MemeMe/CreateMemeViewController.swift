@@ -17,6 +17,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var toolbar: UIToolbar!
+
     let defaultMemeTopText = "MEME TOP"
     let defaultMemeBottomText = "MEME BOTTOM"
     let memeTextAttributes: [String: Any] = [
@@ -24,11 +25,21 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
         NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSAttributedStringKey.strokeWidth.rawValue: -1.5]
+    //Properties used to edit existing memes
+    var savedMemeTopText: String!
+    var savedMemeBottomText: String!
+    var savedMemeOriginalImage: UIImage!
     // MARK: - View functions
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextField(textField: memeTextTop, defaultText: defaultMemeTopText)
         setupTextField(textField: memeTextBottom, defaultText: defaultMemeBottomText)
+        //Determines if this is editing an existing meme and populating the fields if so
+        if savedMemeOriginalImage != nil {
+            memeImageView.image = savedMemeOriginalImage
+            memeTextTop.text = savedMemeTopText
+            memeTextBottom.text = savedMemeBottomText
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

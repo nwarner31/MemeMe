@@ -55,7 +55,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     //Action when a cell within the collection view is clicked
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let memeDetailView = self.storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
-        memeDetailView.memeImage = memes[indexPath.row].memeImage
+        memeDetailView.meme = memes[indexPath.row]
         navigationController?.pushViewController(memeDetailView, animated: true)
     }
 }
